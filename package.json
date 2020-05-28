@@ -1,0 +1,32 @@
+{
+  "name": "tenten-graphql-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js  --ext js,graphql",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laurell876/tenten-graphql-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Laurell876/tenten-graphql-api/issues"
+  },
+  "homepage": "https://github.com/Laurell876/tenten-graphql-api#readme",
+  "dependencies": {
+    "apollo-server": "^2.14.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "graphql": "^15.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.16",
+    "nodemon": "^2.0.4",
+    "shortid": "^2.2.15",
+    "validator": "^13.0.0"
+  }
+}
