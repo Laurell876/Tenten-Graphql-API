@@ -2,7 +2,6 @@ const User = require("../models/User");
 const { login } = require("./Auth");
 const Listing = require("../models/Listing");
 
-
 const Query = {
   users: async (parent, args, context, info) => {
     try {

@@ -53,6 +53,7 @@ const typeDefs = gql`
     size:Int!
     description:String
     rent: Int!
+    image: String
   }
   input ListingUpdateInput {
     id:ID!
@@ -65,15 +66,17 @@ const typeDefs = gql`
     size:Int
     description:String
     rent: Int
+    image: String
   }
 
   type Query {
     users(id: ID): [User],
     login(data: LoginInput!): AuthData!
-    listings(id:ID) : [Listing]
+    listings(id:ID) : [Listing] 
+
   }
 
-    type File {
+  type File {
     id: ID!
     filename: String!
     mimetype: String!
@@ -85,9 +88,6 @@ const typeDefs = gql`
     createListing(data: ListingInput!) : Listing!
     updateListing(data: ListingUpdateInput!): Listing!
     removeListing(id: ID!): Listing!
-    uploadListingImage(file: Upload!, id: ID!): File
-    deleteListingImage(listingId: ID!) : String!
-
   }
 `
 
