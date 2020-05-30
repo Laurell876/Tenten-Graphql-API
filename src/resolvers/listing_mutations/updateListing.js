@@ -57,7 +57,7 @@ const updateListing = async (parent, args, context, info) => {
       // Process upload
       upload = await processUpload(args.file);
       //console.log(upload)
-      listingImage = upload.path;
+      listingImage = upload.path; 
     }
 
     //overwrites specific fields

@@ -58,6 +58,10 @@ const createListing = async (parent, args, context, info) => {
       owner: context.userId,
     });
 
+    //add listing to user's created listings array
+    userFound.overwrite({...userFound._doc, createdListings: [...userFound._doc.createdListings, newListing.id]})
+    await userFound.save()
+
     newListing = await newListing.save();
 
     return {

@@ -7,16 +7,10 @@ const express = require("express");
 const connect = require("./db.js");
 const cors = require("cors");
 const app = express();
+const Listing = require("./resolvers/Listing")
+const User = require("./resolvers/User")
 
-// connect
-//   .then(() => {
-//     app.listen({ port: process.env.PORT || 4000 }, () =>
-//       console.log(
-//         `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
-//       )
-//     );
-//   })
-//   .catch((e) => console.log(e));
+
 
 const start = async () => {
   try {
@@ -26,6 +20,8 @@ const start = async () => {
     const resolvers = {
       Query,
       Mutation,
+      Listing,
+      User
     };
 
     const server = new ApolloServer({

@@ -20,7 +20,20 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    image: String,
+    createdListings: [
+        {
+            type:Schema.Types.ObjectId,
+            ref:"Listing"
+        }
+    ],
+    favoriteListings: [
+        {
+            type: Schema.Types.ObjectId,
+            ref:"Listing"
+        }
+    ]
 })
 
 module.exports = mongoose.model("User", userSchema);

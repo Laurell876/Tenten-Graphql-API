@@ -8,6 +8,9 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String
+    image: String
+    createdListings: [Listing]
+    favoriteListings: [Listing]
   }
 
 
@@ -86,6 +89,10 @@ const typeDefs = gql`
     createListing(data: ListingInput!, file:Upload) : Listing!
     updateListing(data: ListingUpdateInput!, file:Upload): Listing!
     removeListing(id: ID!): Listing!
+    addUserImage(file:Upload!) : String!
+    removeUserImage : String!,
+    addFavorite(id: ID!) : Listing!
+    removeFavorite(id: ID!): Listing!
   }
 `
 
