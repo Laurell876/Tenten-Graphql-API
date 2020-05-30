@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const { login } = require("./Auth");
+const Listing = require("../models/Listing");
+
 
 const Query = {
   users: async (parent, args, context, info) => {
@@ -24,7 +26,22 @@ const Query = {
       throw e;
     }
   },
-  login
+  login,
+  listings: async(parent,args,context,info)=> {
+    try {
+      if(args.id) {
+        const listingFound = await Listing.find({_id:args.id})
+        if(!listingFound[0]) {
+          throw new Error("Listing not found")
+        }
+        return listingFound;
+      } else {
+        return await Listing.find()
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 };
 
 module.exports = Query;

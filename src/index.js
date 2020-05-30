@@ -5,29 +5,50 @@ const typeDefs = require("./schema.graphql");
 const isAuth = require("./middleware/is-auth");
 const express = require("express");
 const connect = require("./db.js");
-const cors = require("cors")
+const cors = require("cors");
 const app = express();
 
-const resolvers = {
-  Query,
-  Mutation
+// connect
+//   .then(() => {
+//     app.listen({ port: process.env.PORT || 4000 }, () =>
+//       console.log(
+//         `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
+//       )
+//     );
+//   })
+//   .catch((e) => console.log(e));
+
+const start = async () => {
+  try {
+    await connect()
+    console.log("Connected 🚀 To MongoDB Successfully");
+
+    const resolvers = {
+      Query,
+      Mutation,
+    };
+
+    const server = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: ({ req }) => {
+        return isAuth(req);
+      },
+    });
+    server.applyMiddleware({ app });
+
+    app.use(cors());
+
+    app.listen({ port: process.env.PORT || 4000 }, () =>
+    console.log(
+      `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
+    )
+  );
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => {
-    return isAuth(req);
-  },
-});
-server.applyMiddleware({ app });
+start();
 
-app.use(cors())
-
-connect
-  .then(() => {
-    app.listen({ port: process.env.PORT || 4000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-);
-  })
-  .catch((e) => console.log(e));
+module.exports = start;

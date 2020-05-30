@@ -26,21 +26,68 @@ const typeDefs = gql`
   type AuthData {
     userId: ID!
     token:String!
-    tokenExpiration: Int!
+  }
+
+  type Listing {
+    _id:ID!
+    title: String!
+    bedrooms: Int!
+    bathrooms: Int!
+    address: String!
+    city:String!
+    parish:String!
+    size:Int!
+    description:String
+    rent:Int!
+    owner: User!
+    image:String
+  }
+
+  input ListingInput {
+    title: String!
+    bedrooms:Int!
+    bathrooms:Int!
+    address:String!
+    city:String!
+    parish:String!
+    size:Int!
+    description:String
+    rent: Int!
+  }
+  input ListingUpdateInput {
+    id:ID!
+    title: String
+    bedrooms:Int
+    bathrooms:Int
+    address:String
+    city:String
+    parish:String
+    size:Int
+    description:String
+    rent: Int
   }
 
   type Query {
     users(id: ID): [User],
     login(data: LoginInput!): AuthData!
+    listings(id:ID) : [Listing]
   }
 
-
-
-
-
+    type File {
+    id: ID!
+    filename: String!
+    mimetype: String!
+    path: String!
+  }
 
   type Mutation {
     signUp(data: UserInput!): User!
+    createListing(data: ListingInput!) : Listing!
+    updateListing(data: ListingUpdateInput!): Listing!
+    removeListing(id: ID!): Listing!
+    uploadListingImage(file: Upload!, id: ID!): File
+    deleteListingImage(listingId: ID!) : String!
+
   }
 `
 
