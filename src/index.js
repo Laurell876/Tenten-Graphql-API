@@ -39,6 +39,10 @@ const start = async () => {
 
     app.use(cors());
 
+    //makes folder available public 
+    app.use(express.static("images"))
+    //example of image link: localhost://4000/nameoffile
+
     app.listen({ port: process.env.PORT || 4000 }, () =>
     console.log(
       `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
