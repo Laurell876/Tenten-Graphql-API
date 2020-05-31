@@ -85,7 +85,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    signUp(data: UserInput!): User!
+    signUp(data: UserInput!): AuthData!
     createListing(data: ListingInput!, file:Upload) : Listing!
     updateListing(data: ListingUpdateInput!, file:Upload): Listing!
     removeListing(id: ID!): Listing!
