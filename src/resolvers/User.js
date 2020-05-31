@@ -10,6 +10,14 @@ const User = {
             }
         })
         return listings
+    },
+    favoriteListings: async (parent,args,context,info)=> {
+        const listings = await Listing.find({
+            _id: {
+                $in: [...parent.favoriteListings]
+            }
+        })
+        return listings
     }
 }
 
