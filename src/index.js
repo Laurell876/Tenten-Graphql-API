@@ -26,19 +26,13 @@ const start = async () => {
       typeDefs,
       resolvers,
       context: ({ req, res }) => {
-        return { ...isAuth(req), res: res };
+        return {...isAuth(req)};
       },
     });
     server.applyMiddleware({ app });
 
-    app.use(
-      cors({
-        //allows cookie to be set
-        credentials:true,
-        //uri of front end
-        origin:"http://localhost:3000"
-      })
-    );
+    app.use(cors());  
+
 
     //makes folder available public
     app.use(express.static("images"));

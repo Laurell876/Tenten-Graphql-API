@@ -28,13 +28,13 @@ const signUp = async (parent, args, context, info) => {
 
     //send back a cookie to browser
     //stores token as a cookie
-    context.res.cookie("id", token, {
-      //javascript cannot access the cookie once its sent to the client
-      //helps to secure it
-      httpOnly: true,
-      //if im in a production environment it uses https so its secure
-      secure: process.env.NODE_ENV === "production",
-    });
+    // context.res.cookie("id", token, {
+    //   //javascript cannot access the cookie once its sent to the client
+    //   //helps to secure it
+    //   httpOnly: true,
+    //   //if im in a production environment it uses https so its secure
+    //   secure: process.env.NODE_ENV === "production",
+    // });
 
     return {
       userId: user.id,
@@ -69,13 +69,13 @@ const login = async (parent, args, context, info) => {
     
     //send back a cookie to browser
     //stores token as a cookie
-    context.res.cookie("id", token, {
-      //javascript cannot access the cookie once its sent to the client
-      //helps to secure it
-      httpOnly: true,
-      //if im in a production environment it uses https so its secure
-      secure: process.env.NODE_ENV === "production",
-    });
+    // context.res.cookie("id", token, {
+    //   //javascript cannot access the cookie once its sent to the client
+    //   //helps to secure it
+    //   httpOnly: true,
+    //   //if im in a production environment it uses https so its secure
+    //   secure: process.env.NODE_ENV === "production",
+    // });
 
     return {
       userId: user.id,
