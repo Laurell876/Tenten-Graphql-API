@@ -38,6 +38,14 @@ const listingSchema = new Schema({
         type:Number,
         required:true
     },
+    rating: {
+        type:Number,
+        required:true,
+    },
+    featured: {
+        type: Boolean,
+        required:true
+    },
     owner: {
         type:Schema.Types.ObjectId,
         red:"User",

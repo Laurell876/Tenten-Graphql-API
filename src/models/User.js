@@ -22,6 +22,7 @@ const userSchema = new Schema({
         required: true
     },
     image: String,
+    defaultParish:String,
     createdListings: [
         {
             type:Schema.Types.ObjectId,

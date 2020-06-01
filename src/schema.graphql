@@ -8,10 +8,13 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String
+    defaultParish: String
     image: String
     createdListings: [Listing]
     favoriteListings: [Listing]
   }
+
+
 
 
   input UserInput {
@@ -44,6 +47,8 @@ const typeDefs = gql`
     rent:Int!
     owner: User!
     image:String
+    rating: Int!
+    featured: Boolean!
   }
 
   input ListingInput {
@@ -56,6 +61,8 @@ const typeDefs = gql`
     size:Int!
     description:String
     rent: Int!
+    rating: Int!
+    featured: Boolean!
   }
   input ListingUpdateInput {
     id:ID!
@@ -68,13 +75,15 @@ const typeDefs = gql`
     size:Int
     description:String
     rent: Int
+    rating: Int
+    featured: Boolean
   }
 
   type Query {
     users(id: ID): [User],
     login(data: LoginInput!): AuthData!
     listings(id:ID) : [Listing] 
-
+    me: User!
   }
 
   type File {
