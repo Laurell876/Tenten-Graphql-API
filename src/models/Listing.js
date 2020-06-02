@@ -43,8 +43,7 @@ const listingSchema = new Schema({
         required:true,
     },
     featured: {
-        type: Boolean,
-        required:true
+        type: Boolean
     },
     owner: {
         type:Schema.Types.ObjectId,
