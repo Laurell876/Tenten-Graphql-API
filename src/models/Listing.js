@@ -40,9 +40,11 @@ const listingSchema = new Schema({
     },
     rating: {
         type:Number,
+        default:3
     },
     featured: {
-        type: Boolean
+        type: Boolean,
+        default:false
     },
     owner: {
         type:Schema.Types.ObjectId,
