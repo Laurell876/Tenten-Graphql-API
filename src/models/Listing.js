@@ -40,7 +40,6 @@ const listingSchema = new Schema({
     },
     rating: {
         type:Number,
-        required:true,
     },
     featured: {
         type: Boolean

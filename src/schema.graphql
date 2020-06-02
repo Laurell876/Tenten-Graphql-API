@@ -61,7 +61,7 @@ const typeDefs = gql`
     size:Int!
     description:String
     rent: Int!
-    rating: Int!
+    rating: Int
     featured: Boolean
   }
   input ListingUpdateInput {
