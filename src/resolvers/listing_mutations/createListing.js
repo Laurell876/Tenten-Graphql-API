@@ -1,7 +1,7 @@
 const Listing = require("../../models/Listing");
 const User = require("../../models/User");
 const authCheck = require("../functions/authCheck");
-
+const path = require("path")
 const shortid = require("shortid");
 const { createWriteStream, mkdir } = require("fs");
 //const File = require("./fileModel");
@@ -35,22 +35,39 @@ const createListing = async (parent, args, context, info) => {
       throw new Error("User does not exist");
     }
 
-
-    let listingImage=null
-    let upload
+    let listingImage = null;
+    let upload;
     //UPLOADING LISTING IMAGE
+    // if (args.file) {
+    //   // Creates an images folder in the root directory
+    //   mkdir("images", { recursive: true }, (err) => {
+    //     if (err) throw err;
+    //   });
+    //   // Process upload
+    //   upload = await processUpload(args.file);
+    //   //console.log(upload)
+    //   listingImage = upload.path
+    // }
+
     if (args.file) {
-      // Creates an images folder in the root directory
-      mkdir("images", { recursive: true }, (err) => {
-        if (err) throw err;
-      });
-      // Process upload
-      upload = await processUpload(args.file);
-      //console.log(upload)
-      listingImage = upload.path
+      const id = shortid.generate();
+
+      const { createReadStream, filename } = await args.file;
+      //console.log(args.file)
+
+
+      const upload = await new Promise((res) =>
+        createReadStream().pipe(
+          createWriteStream(
+            path.join(__dirname, "../../../images", `/${id}-${filename}`)
+          )
+        )
+        .on("close",res)
+      );
+      console.log(filename)
+      listingImage = `images/${id}-${filename}`
+      console.log(listingImage)
     }
-
-
 
     let newListing = new Listing({
       ...args.data,
@@ -59,8 +76,11 @@ const createListing = async (parent, args, context, info) => {
     });
 
     //add listing to user's created listings array
-    userFound.overwrite({...userFound._doc, createdListings: [...userFound._doc.createdListings, newListing.id]})
-    await userFound.save()
+    userFound.overwrite({
+      ...userFound._doc,
+      createdListings: [...userFound._doc.createdListings, newListing.id],
+    });
+    await userFound.save();
 
     newListing = await newListing.save();
 
