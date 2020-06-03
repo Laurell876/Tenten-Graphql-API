@@ -36,6 +36,9 @@ const start = async () => {
 
     //makes folder available public
     app.use(express.static("images"));
+
+    app.use(express.static("doc"));
+
     //example of image link: localhost://4000/nameoffile
 
     app.listen({ port: process.env.PORT || 4000 }, () =>
