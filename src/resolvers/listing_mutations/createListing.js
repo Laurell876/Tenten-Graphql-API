@@ -38,9 +38,8 @@ const createListing = async (parent, args, context, info) => {
     let listingImage = null;
     let upload;
     //UPLOADING LISTING IMAGE
-    console.log("hello")
     if (args.file) {
-      console.log("HI")
+      console.log(args.file)
       // Creates an images folder in the root directory
       mkdir("images", { recursive: true }, (err) => {
         if (err) throw err;
