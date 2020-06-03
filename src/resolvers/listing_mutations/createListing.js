@@ -38,36 +38,36 @@ const createListing = async (parent, args, context, info) => {
     let listingImage = null;
     let upload;
     //UPLOADING LISTING IMAGE
-    // if (args.file) {
-    //   // Creates an images folder in the root directory
-    //   mkdir("images", { recursive: true }, (err) => {
-    //     if (err) throw err;
-    //   });
-    //   // Process upload
-    //   upload = await processUpload(args.file);
-    //   //console.log(upload)
-    //   listingImage = upload.path
-    // }
-
     if (args.file) {
-      const id = shortid.generate();
-
-      const { createReadStream, filename } = await args.file;
-      //console.log(args.file)
-
-
-      const upload = await new Promise((res) =>
-        createReadStream().pipe(
-          createWriteStream(
-            path.join(__dirname, "../../../images", `/${id}-${filename}`)
-          )
-        )
-        .on("close",res)
-      );
-      console.log(filename)
-      listingImage = `images/${id}-${filename}`
-      console.log(listingImage)
+      // Creates an images folder in the root directory
+      mkdir("images", { recursive: true }, (err) => {
+        if (err) throw err;
+      });
+      // Process upload
+      upload = await processUpload(args.file);
+      //console.log(upload)
+      listingImage = upload.path
     }
+
+    // if (args.file) {
+    //   const id = shortid.generate();
+
+    //   const { createReadStream, filename } = await args.file;
+    //   //console.log(args.file)
+
+
+    //   const upload = await new Promise((res) =>
+    //     createReadStream().pipe(
+    //       createWriteStream(
+    //         path.join(__dirname, "../../../images", `/${id}-${filename}`)
+    //       )
+    //     )
+    //     .on("close",res)
+    //   );
+    //   console.log(filename)
+    //   listingImage = `images/${id}-${filename}`
+    //   console.log(listingImage)
+    // }
 
     let newListing = new Listing({
       ...args.data,
