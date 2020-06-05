@@ -51,7 +51,25 @@ module.exports = async (parent, args, context, info) => {
 
     await listing.save();
 
-    console.log(args.value);
+    //RE-FETCH UPDATED LISTINGS WITH NEW RATING VALUE
+    listing = await Listing.findOne({_id: args.id})
+
+
+    //UPDATE THE RATING VALUE FOR THE LISTING
+    let total = 0;
+    let count = 0;
+
+    listing.allRatings.forEach((rating)=> {
+        total = total + rating.userRating;
+        count++;
+    })
+
+    let mean = Math.floor(parseFloat(total/count))
+    listing.overwrite({
+        ...listing._doc,
+        rating: mean
+    })
+    await listing.save();
 
     return newRating 
   } catch (e) {
