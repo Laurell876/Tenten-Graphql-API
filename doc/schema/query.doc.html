@@ -105,6 +105,16 @@
                 Listing
             </a>
         </li>
+        <li  title="Rating">
+            <a href="rating.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Rating
+            </a>
+        </li>
+        <li  title="Review">
+            <a href="review.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Review
+            </a>
+        </li>
         <li  title="User">
             <a href="user.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 User
@@ -218,7 +228,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Query</span> {</li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>id</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">users</span>(<span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>): [<a class="support type" href="user.doc.html">User</a>] </span></li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>data</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">login</span>(<span class="meta">data</span>: <a class="support type" href="logininput.doc.html">LoginInput</a>!): <a class="support type" href="authdata.doc.html">AuthData</a>! </span></li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>id</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">listings</span>(<span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>): [<a class="support type" href="listing.doc.html">Listing</a>] </span></li><li></li><li><span class="tab"><span class="meta">me</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">Query</span> {</li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>id</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">users</span>(<span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>): [<a class="support type" href="user.doc.html">User</a>] </span></li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>data</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">login</span>(<span class="meta">data</span>: <a class="support type" href="logininput.doc.html">LoginInput</a>!): <a class="support type" href="authdata.doc.html">AuthData</a>! </span></li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>id</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">listings</span>(<span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>): [<a class="support type" href="listing.doc.html">Listing</a>] </span></li><li></li><li><span class="tab"><span class="meta">me</span>: <a class="support type" href="user.doc.html">User</a>! </span></li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>listingId</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">reviews</span>(<span class="meta">listingId</span>: <a class="support type" href="id.doc.html">ID</a>): [<a class="support type" href="review.doc.html">Review</a>] </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
