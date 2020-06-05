@@ -50,7 +50,7 @@ const Query = {
   listings: async (parent, args, context, info) => {
     try {
       if (args.id) {
-        const listingFound = await Listing.findOne({ _id: args.id });
+        const listingFound = await Listing.find({ _id: args.id });
         if (!listingFound[0]) {
           throw new Error("Listing not found");
         }
