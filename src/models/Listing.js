@@ -48,21 +48,27 @@ const listingSchema = new Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    red: "User",
+    ref: "User",
     required: true,
   },
   image: String,
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
   allRatings: [
     {
       userId: {
         type: Schema.Types.ObjectId,
-        red: "User",
+        ref: "User",
       },
       userRating: {
-          type: Number,
-          min:1,
-          max:5
-      }
+        type: Number,
+        min: 1,
+        max: 5,
+      },
     },
   ],
 });

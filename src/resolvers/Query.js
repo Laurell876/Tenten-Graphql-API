@@ -2,6 +2,7 @@ const User = require("../models/User");
 const { login } = require("./Auth");
 const Listing = require("../models/Listing");
 const authCheck = require("./functions/authCheck");
+const Review = require("../models/Review")
 
 const Query = {
   me: async (parent, args, context, info) => {
@@ -15,8 +16,9 @@ const Query = {
     }
 
     return {
-      ...userFound._doc, password:null
-    }
+      ...userFound._doc,
+      password: null,
+    };
     try {
     } catch (e) {
       throw e;
@@ -55,6 +57,27 @@ const Query = {
         return listingFound;
       } else {
         return await Listing.find();
+      }
+    } catch (e) {
+      throw e;
+    }
+  },
+  reviews: async (parent, args, context, info) => {
+    try {
+      if (args.listingId) {
+        //check if listing exists
+        const listingFound = await Listing.find({ _id: args.listingId });
+        if (!listingFound[0]) {
+          throw new Error("Listing not found");
+        }
+
+        //return all the reviews that belong to this listing
+        let reviews = await Review.find();
+        reviews = reviews.filter(review=> review.listing = args.listingId)
+        return reviews
+      } else {
+        //return all reviews
+        return await Review.find()
       }
     } catch (e) {
       throw e;

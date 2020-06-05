@@ -12,6 +12,38 @@ const typeDefs = gql`
     image: String
     createdListings: [Listing]
     favoriteListings: [Listing]
+    reviews: [Review]
+  }
+
+    type Listing {
+    _id:ID!
+    title: String!
+    bedrooms: Int!
+    bathrooms: Int!
+    address: String!
+    city:String!
+    parish:String!
+    size:Int!
+    description:String
+    rent:Int!
+    owner: User!
+    image:String
+    rating: Int!
+    featured: Boolean!
+    allRatings: [Rating]
+    reviews:[Review]
+  }
+
+  type Rating {
+    userId: ID
+    userRating: Int
+  }
+
+  type Review {
+    _id: ID!
+    user: User!
+    listing:Listing!
+    review:String!
   }
 
 
@@ -34,28 +66,6 @@ const typeDefs = gql`
     token:String!
   }
 
-  type Listing {
-    _id:ID!
-    title: String!
-    bedrooms: Int!
-    bathrooms: Int!
-    address: String!
-    city:String!
-    parish:String!
-    size:Int!
-    description:String
-    rent:Int!
-    owner: User!
-    image:String
-    rating: Int!
-    featured: Boolean!
-    allRatings: [Rating]
-  }
-
-  type Rating {
-    userId: ID
-    userRating: Int
-  }
 
 
   input ListingInput {
@@ -91,6 +101,7 @@ const typeDefs = gql`
     login(data: LoginInput!): AuthData!
     listings(id:ID) : [Listing] 
     me: User!
+    reviews(listingId: ID) : [Review]
   }
 
   type File {
@@ -110,6 +121,8 @@ const typeDefs = gql`
     addFavorite(id: ID!) : Listing!
     removeFavorite(id: ID!): Listing!
     rateListing(id: ID!, value: Int!) : Rating!
+    addReview(listingId: ID!, review: String!) : Review!
+    removeReview(id:ID!) : Review!
   }
 `
 

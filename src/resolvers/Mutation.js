@@ -7,8 +7,8 @@ const removeUserImage = require("./user_image_mutations/remove_user_image")
 const addFavorite = require("./favorite_mutations/add_favorite")
 const removeFavorite = require("./favorite_mutations/remove_favorite")
 const rateListing = require("./rating_mutations/rate_listing");
-
-
+const addReview = require("./review_mutations/add_review")
+const removeReview = require("./review_mutations/remove_review.js")
 const Mutation = {
   signUp,
   createListing,
@@ -18,7 +18,9 @@ const Mutation = {
   removeUserImage,
   addFavorite,
   removeFavorite,
-  rateListing
+  rateListing,
+  addReview,
+  removeReview
 };
 
 module.exports = Mutation;

@@ -9,6 +9,7 @@ const cors = require("cors");
 const app = express();
 const Listing = require("./resolvers/Listing");
 const User = require("./resolvers/User");
+const Review = require("./resolvers/Review")
 
 const start = async () => {
   try {
@@ -20,6 +21,7 @@ const start = async () => {
       Mutation,
       Listing,
       User,
+      Review
     };
 
     const server = new ApolloServer({
