@@ -6,7 +6,7 @@ const addUserImage = require("./user_image_mutations/add_user_image")
 const removeUserImage = require("./user_image_mutations/remove_user_image")
 const addFavorite = require("./favorite_mutations/add_favorite")
 const removeFavorite = require("./favorite_mutations/remove_favorite")
-
+const rateListing = require("./rating_mutations/rate_listing");
 
 
 const Mutation = {
@@ -17,7 +17,8 @@ const Mutation = {
   addUserImage,
   removeUserImage,
   addFavorite,
-  removeFavorite
+  removeFavorite,
+  rateListing
 };
 
 module.exports = Mutation;
