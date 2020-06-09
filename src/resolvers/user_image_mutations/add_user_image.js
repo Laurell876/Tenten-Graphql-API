@@ -27,7 +27,7 @@ const addUserImage = async (parent, args, context, info) => {
   authCheck(context);
 
   try {
-    const user = await User.findById(conext.userId);
+    const user = await User.findById(context.userId);
     userCheck(context, user);
 
     //if user already has an image that image is deleted from the file system
