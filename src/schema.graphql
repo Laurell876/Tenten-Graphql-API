@@ -111,7 +111,25 @@ const typeDefs = gql`
     path: String!
   }
 
+  type Message {
+    _id:ID!
+    sender: User!
+    receiver: User!
+    createdAt: User!
+    text: String!
+  }
+
+  type Chat {
+    _id:ID!
+    users:[User!]!
+    messages: [Message]
+    lastMessage: Message
+    createdAt:String!
+    updatedAt: String!
+  }
+
   type Mutation {
+    startChat(userIds: [ID!]!) : Chat!
     signUp(data: UserInput!): AuthData!
     createListing(data: ListingInput!, file:Upload) : Listing!
     updateListing(data: ListingUpdateInput!, file:Upload): Listing!
