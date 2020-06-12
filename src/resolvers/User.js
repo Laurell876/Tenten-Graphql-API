@@ -1,5 +1,5 @@
 const Listing = require("../models/Listing")
-
+const Chat = require("../models/Chat")
 
 
 const User = {
@@ -18,6 +18,12 @@ const User = {
             }
         })
         return listings
+    },
+    chats: async(parent, args,context,info)=> {
+        const chats = await Chat.find({_id: {
+            $in: [...parent.chats]
+        }})
+        return chats
     }
 }
 
