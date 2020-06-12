@@ -33,6 +33,14 @@ module.exports = async (parent, args, context, info) => {
 
     message = await message.save();
 
+    //add message to the chat's messages field
+    chatFound.overwrite({
+      ...chatFound._doc,
+      messages: [...chatFound._doc.messages, message]
+    })
+
+    await chatFound.save()
+
     //calls subscription
     context.pubsub.publish("NEW_MESSAGE", {
       newMessage: {

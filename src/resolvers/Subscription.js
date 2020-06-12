@@ -8,8 +8,8 @@ const Subscription = {
     subscribe: withFilter(
       (parent, args, context, info) => context.pubsub.asyncIterator("NEW_MESSAGE"),
         (payload, variables) => {
-          console.log(variables.chatId, payload.newMessage.chat._id)
-          return payload.newMessage.chat._id == variables.chatId
+          //console.log(variables.chatId, payload.newMessage.chat._id)
+          return variables.chatId ? payload.newMessage.chat._id == variables.chatId : true
         }
     ),
   },
