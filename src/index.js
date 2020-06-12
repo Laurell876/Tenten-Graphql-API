@@ -10,6 +10,9 @@ const app = express();
 const Listing = require("./resolvers/Listing");
 const User = require("./resolvers/User");
 const Review = require("./resolvers/Review")
+const Chat = require("./resolvers/Chat")
+const Message = require("./resolvers/Message")
+const Subscription = require("./resolvers/Subscription")
 
 const start = async () => {
   try {
@@ -19,9 +22,12 @@ const start = async () => {
     const resolvers = {
       Query,
       Mutation,
+      Subscription,
       Listing,
       User,
-      Review
+      Review,
+      Chat,
+      Message
     };
 
     const server = new ApolloServer({

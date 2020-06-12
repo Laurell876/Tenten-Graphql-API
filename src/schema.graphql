@@ -13,9 +13,12 @@ const typeDefs = gql`
     createdListings: [Listing]
     favoriteListings: [Listing]
     reviews: [Review]
+    messagesSent: [Message]
+    messagesReceived: [Message]
+    chats: [Chat]
   }
 
-    type Listing {
+  type Listing {
     _id:ID!
     title: String!
     bedrooms: Int!
@@ -46,8 +49,28 @@ const typeDefs = gql`
     review:String!
   }
 
+  
+  type Message {
+    _id:ID!
+    sender: User!
+    receiver: User!
+    createdAt: String!
+    text: String!
+    chat: Chat!
+  }
 
+  type Chat {
+    _id:ID!
+    userOne: User!,
+    userTwo: User!
+    messages: [Message]
+    lastMessage: Message
+  }
 
+  type AuthData {
+    userId: ID!
+    token:String!
+  }
 
   input UserInput {
     firstName: String!
@@ -60,12 +83,6 @@ const typeDefs = gql`
     email:String!, 
     password:String!
   }
-  
-  type AuthData {
-    userId: ID!
-    token:String!
-  }
-
 
 
   input ListingInput {
@@ -81,6 +98,7 @@ const typeDefs = gql`
     rating: Int
     featured: Boolean
   }
+
   input ListingUpdateInput {
     id:ID!
     title: String
@@ -96,40 +114,30 @@ const typeDefs = gql`
     featured: Boolean
   }
 
-  type Query {
-    users(id: ID): [User],
-    login(data: LoginInput!): AuthData!
-    listings(id:ID) : [Listing] 
-    me: User!
-    reviews(listingId: ID) : [Review]
-  }
-
-  type File {
+    type File {
     id: ID!
     filename: String!
     mimetype: String!
     path: String!
   }
 
-  type Message {
-    _id:ID!
-    sender: User!
-    receiver: User!
-    createdAt: User!
-    text: String!
+  type Query {
+    users(id: ID): [User],
+    login(data: LoginInput!): AuthData!
+    listings(id:ID) : [Listing] 
+    me: User!
+    reviews(listingId: ID) : [Review]
+    chats: [Chat!]!
+    messages(chatId: ID): [Message!]!
+    
   }
 
-  type Chat {
-    _id:ID!
-    users:[User!]!
-    messages: [Message]
-    lastMessage: Message
-    createdAt:String!
-    updatedAt: String!
+  input CreateMessageInput {
+    receiver: ID!, text:String!, chat:ID!
   }
+
 
   type Mutation {
-    startChat(userIds: [ID!]!) : Chat!
     signUp(data: UserInput!): AuthData!
     createListing(data: ListingInput!, file:Upload) : Listing!
     updateListing(data: ListingUpdateInput!, file:Upload): Listing!
@@ -141,6 +149,10 @@ const typeDefs = gql`
     rateListing(id: ID!, value: Int!) : Rating!
     addReview(listingId: ID!, review: String!) : Review!
     removeReview(id:ID!) : Review!
+
+    createMessage(data: CreateMessageInput!) : Message!
+
+    startChat(userTwo: ID!) : Chat!
   }
 `
 

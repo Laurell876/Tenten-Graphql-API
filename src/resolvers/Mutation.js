@@ -9,6 +9,8 @@ const removeFavorite = require("./favorite_mutations/remove_favorite")
 const rateListing = require("./rating_mutations/rate_listing");
 const addReview = require("./review_mutations/add_review")
 const removeReview = require("./review_mutations/remove_review.js")
+const createMessage = require("./chat_mutations/create_message")
+const startChat = require("./chat_mutations/start_chat")
 const Mutation = {
   signUp,
   createListing,
@@ -20,7 +22,9 @@ const Mutation = {
   removeFavorite,
   rateListing,
   addReview,
-  removeReview
+  removeReview,
+  createMessage,
+  startChat
 };
 
 module.exports = Mutation;

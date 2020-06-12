@@ -2,8 +2,9 @@ const User = require("../models/User");
 const { login } = require("./Auth");
 const Listing = require("../models/Listing");
 const authCheck = require("./functions/authCheck");
-const Review = require("../models/Review")
-
+const Review = require("../models/Review");
+const Chat = require("../models/Chat");
+const Message = require("../models/Message");
 const Query = {
   me: async (parent, args, context, info) => {
     //authentication check
@@ -73,12 +74,31 @@ const Query = {
 
         //return all the reviews that belong to this listing
         let reviews = await Review.find();
-        reviews = reviews.filter(review=> review.listing = args.listingId)
-        return reviews
+        reviews = reviews.filter((review) => (review.listing = args.listingId));
+        return reviews;
       } else {
         //return all reviews
-        return await Review.find()
+        return await Review.find();
       }
+    } catch (e) {
+      throw e;
+    }
+  },
+  chats: async (parent, args, context, info) => {
+    try {
+      return await Chat.find();
+    } catch (e) {
+      throw e;
+    }
+  },
+  messages: async (parent, args, context, info) => {
+    try {
+      if (args.chatId) {
+        let messages = await Message.find();
+        messages = messages.filter(message=>message._doc.chat == args.chatId );
+        return messages;
+      }
+      return await Message.find();
     } catch (e) {
       throw e;
     }

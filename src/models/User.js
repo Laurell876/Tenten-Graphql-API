@@ -40,6 +40,24 @@ const userSchema = new Schema({
       ref: "Review",
     },
   ],
+  messagesSent: [
+    {
+      type: Schema.Types.ObjectId,
+      ref:"Message"
+    }
+  ],
+  messagesReceived: [
+    {
+      type: Schema.Types.ObjectId,
+      ref:"Message"
+    }
+  ],
+  chats: [
+    {
+      type:Schema.Types.ObjectId,
+      ref:"Chat"
+    }
+  ]
 });
 
 module.exports = mongoose.model("User", userSchema);
