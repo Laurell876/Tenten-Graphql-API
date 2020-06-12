@@ -3,7 +3,7 @@ const Listing = require("../../models/Listing");
 const authCheck = require("../functions/authCheck");
 const mongoose = require("mongoose");
 const Message = require("../../models/Message");
-const Chat = require("../../models/Chat")
+const Chat = require("../../models/Chat");
 
 module.exports = async (parent, args, context, info) => {
   authCheck(context);
@@ -21,8 +21,8 @@ module.exports = async (parent, args, context, info) => {
     }
 
     //ensure that chat exists
-    let chatFound = await Chat.findOne({_id: args.data.chat})
-    if(!chatFound) throw new Error("Chat does not exist")
+    let chatFound = await Chat.findOne({ _id: args.data.chat });
+    if (!chatFound) throw new Error("Chat does not exist");
 
     //CREATE MESSAGE
     let message = new Message({
@@ -32,6 +32,13 @@ module.exports = async (parent, args, context, info) => {
     });
 
     message = await message.save();
+
+    //calls subscription
+    context.pubsub.publish("NEW_MESSAGE", {
+      newMessage: {
+        ...message._doc,
+      },
+    });
 
     return {
       ...message._doc,

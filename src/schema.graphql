@@ -154,6 +154,11 @@ const typeDefs = gql`
 
     startChat(userTwo: ID!) : Chat!
   }
+
+
+  type Subscription {
+    newMessage(chatId: ID) : Message!
+  }
 `
 
 module.exports = typeDefs
