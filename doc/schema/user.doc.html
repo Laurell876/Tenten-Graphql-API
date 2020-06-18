@@ -35,6 +35,11 @@
                 Mutation
             </a>
         </li>
+        <li  title="Subscription">
+            <a href="subscription.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Subscription
+            </a>
+        </li>
     </ul>
 </div>
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
@@ -95,6 +100,11 @@
                 AuthData
             </a>
         </li>
+        <li  title="Chat">
+            <a href="chat.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Chat
+            </a>
+        </li>
         <li  title="File">
             <a href="file.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 File
@@ -103,6 +113,11 @@
         <li  title="Listing">
             <a href="listing.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 Listing
+            </a>
+        </li>
+        <li  title="Message">
+            <a href="message.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Message
             </a>
         </li>
         <li  title="Rating">
@@ -155,6 +170,11 @@
 <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
     <h4 class="slds-text-title--caps slds-p-around--medium">Input Objects</h4>
     <ul>
+        <li  title="CreateMessageInput">
+            <a href="createmessageinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                CreateMessageInput
+            </a>
+        </li>
         <li  title="ListingInput">
             <a href="listinginput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 ListingInput
@@ -228,7 +248,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">User</span> {</li><li></li><li><span class="tab"><span class="meta">_id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="meta">firstName</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">lastName</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">password</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">defaultParish</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">image</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">createdListings</span>: [<a class="support type" href="listing.doc.html">Listing</a>] </span></li><li></li><li><span class="tab"><span class="meta">favoriteListings</span>: [<a class="support type" href="listing.doc.html">Listing</a>] </span></li><li></li><li><span class="tab"><span class="meta">reviews</span>: [<a class="support type" href="review.doc.html">Review</a>] </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">User</span> {</li><li></li><li><span class="tab"><span class="meta">_id</span>: <a class="support type" href="id.doc.html">ID</a>! </span></li><li></li><li><span class="tab"><span class="meta">firstName</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">lastName</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a>! </span></li><li></li><li><span class="tab"><span class="meta">password</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">defaultParish</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">image</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">createdListings</span>: [<a class="support type" href="listing.doc.html">Listing</a>] </span></li><li></li><li><span class="tab"><span class="meta">favoriteListings</span>: [<a class="support type" href="listing.doc.html">Listing</a>] </span></li><li></li><li><span class="tab"><span class="meta">reviews</span>: [<a class="support type" href="review.doc.html">Review</a>] </span></li><li></li><li><span class="tab"><span class="meta">messagesSent</span>: [<a class="support type" href="message.doc.html">Message</a>] </span></li><li></li><li><span class="tab"><span class="meta">messagesReceived</span>: [<a class="support type" href="message.doc.html">Message</a>] </span></li><li></li><li><span class="tab"><span class="meta">chats</span>: [<a class="support type" href="chat.doc.html">Chat</a>] </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -239,7 +259,7 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="listing.doc.html" title="Listing - ">Listing<em>null</em></a><li><li><a href="query.doc.html" title="Query - ">Query<em>null</em></a><li><li><a href="review.doc.html" title="Review - ">Review<em>null</em></a><li></ul>
+        <ul class="require-by"><li><a href="chat.doc.html" title="Chat - ">Chat<em>null</em></a><li><li><a href="listing.doc.html" title="Listing - ">Listing<em>null</em></a><li><li><a href="message.doc.html" title="Message - ">Message<em>null</em></a><li><li><a href="query.doc.html" title="Query - ">Query<em>null</em></a><li><li><a href="review.doc.html" title="Review - ">Review<em>null</em></a><li></ul>
     </div>
 </section>
 <footer>
