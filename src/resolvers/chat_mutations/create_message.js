@@ -31,7 +31,8 @@ module.exports = async (parent, args, context, info) => {
     //add message to the chat's messages field
     chatFound.overwrite({
       ...chatFound._doc,
-      messages: [...chatFound._doc.messages, message]
+      messages: [...chatFound._doc.messages, message],
+      lastMessage: message
     })
 
     await chatFound.save()
