@@ -14,12 +14,6 @@ module.exports = async (parent, args, context, info) => {
       throw new Error("User does not exist");
     }
 
-    //ensure receiver exists
-    let receiverFound = await User.findOne({ _id: args.data.receiver });
-    if (!receiverFound) {
-      throw new Error("User does not exist");
-    }
-
     //ensure that chat exists
     let chatFound = await Chat.findOne({ _id: args.data.chat });
     if (!chatFound) throw new Error("Chat does not exist");
@@ -27,6 +21,7 @@ module.exports = async (parent, args, context, info) => {
     //CREATE MESSAGE
     let message = new Message({
       ...args.data,
+      receiver: userFound.id == chatFound._doc.userOne ? chatFound._doc.userTwo : chatFound._doc.userOne,
       sender: userFound.id,
       createdAt: new Date(),
     });

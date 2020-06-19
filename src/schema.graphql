@@ -133,7 +133,7 @@ const typeDefs = gql`
   }
 
   input CreateMessageInput {
-    receiver: ID!, text:String!, chat:ID!
+    text:String!, chat:ID!
   }
 
 

@@ -19,6 +19,9 @@ const startChat = async (parent, args, context, info) => {
       throw new Error("Second User does not exist");
     }
 
+    //ensure chat is not being started with the same people
+    if(context.userId == secondUserFound.id) throw new Error("A Chat has to be started with two different people");
+
     //CHECKS TO SEE IF ANOTHER CHAT WITH THE SAME USERS EXISTS
     let chats = await Chat.find();
     let chatExists = chats.filter(
@@ -51,9 +54,7 @@ const startChat = async (parent, args, context, info) => {
 
     await secondUserFound.save()
 
-    return {
-      ...newChat._doc,
-    };
+    return newChat
   } catch (e) {
     throw e;
   }
