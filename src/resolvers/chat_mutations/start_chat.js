@@ -26,7 +26,7 @@ const startChat = async (parent, args, context, info) => {
     let chats = await Chat.find();
     let chatExists = chats.filter(
       (chat) =>
-        chat._doc.userTwo.toString() == args.userTwo
+        chat._doc.userTwo.toString() == args.userTwo || chat._doc.userOne.toString() ==args.userTwo
     );
     //console.log(chatExists)
     if (chatExists.length > 0) throw new Error("Chat already exists");
