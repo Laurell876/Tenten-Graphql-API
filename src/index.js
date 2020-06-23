@@ -65,7 +65,8 @@ const start = async () => {
           }
 
           return {
-            currentUser: "123",
+            currentUserToken: connection,
+            currentUserId: userId
           };
         },
       },

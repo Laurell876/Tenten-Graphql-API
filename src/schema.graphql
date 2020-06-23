@@ -157,7 +157,7 @@ const typeDefs = gql`
 
 
   type Subscription {
-    newMessage: Message
+    newMessage: Message!
   }
 `
 
