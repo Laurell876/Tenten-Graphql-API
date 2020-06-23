@@ -1,4 +1,9 @@
-const { ApolloServer, gql, PubSub,withFilter } = require("apollo-server-express");
+const {
+  ApolloServer,
+  gql,
+  PubSub,
+  withFilter,
+} = require("apollo-server-express");
 const Query = require("./resolvers/Query");
 const Mutation = require("./resolvers/Mutation");
 const typeDefs = require("./schema.graphql");
@@ -14,8 +19,11 @@ const Message = require("./resolvers/Message");
 const Subscription = require("./resolvers/Subscription");
 const http = require("http");
 const app = express();
+const jwt = require("jsonwebtoken");
+const isAuthSubscription = require("./middleware/is-auth-subscription");
 
 const pubsub = new PubSub();
+
 const start = async () => {
   try {
     await connect();
@@ -37,10 +45,29 @@ const start = async () => {
       resolvers,
       context: ({ req, res, connection }) => {
         if (connection) {
-          return {...connect.context, pubsub};
+          return { ...connection, pubsub };
         } else {
-          return { ...isAuth(req),pubsub:pubsub };
+          return { ...isAuth(req), pubsub: pubsub };
         }
+      },
+      subscriptions: {
+        onConnect: (connection, webSocket) => {
+          if (!connection.authToken) throw new Error("User is not authenticated");
+
+          let userId = null;
+          if (connection.authToken) {
+            let decodedToken = jwt.verify(
+              connection.authToken,
+              "somesupersecretkey"
+            );
+            userId = decodedToken.userId;
+            console.log(userId);
+          }
+
+          return {
+            currentUser: "123",
+          };
+        },
       },
     });
 
