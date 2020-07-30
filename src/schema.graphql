@@ -121,16 +121,7 @@ const typeDefs = gql`
     path: String!
   }
 
-  type Query {
-    users(id: ID): [User],
-    login(data: LoginInput!): AuthData!
-    listings(id:ID) : [Listing] 
-    me: User!
-    reviews(listingId: ID) : [Review]
-    chats: [Chat!]!
-    messages(chatId: ID): [Message!]!
-    
-  }
+
 
   input CreateMessageInput {
     text:String!, chat:ID!
@@ -149,16 +140,25 @@ const typeDefs = gql`
     rateListing(id: ID!, value: Int!) : Rating!
     addReview(listingId: ID!, review: String!) : Review!
     removeReview(id:ID!) : Review!
-
     createMessage(data: CreateMessageInput!) : Message!
-
     startChat(userTwo: ID!) : Chat!
 
 
 
 
 
-    registerV2(data: UserInput!) : User!
+    registerV2(data: UserInput!) : AuthData!
+    loginV2(data: LoginInput!) : AuthData!
+  }
+
+  type Query {
+    users(id: ID): [User],
+    login(data: LoginInput!): AuthData!
+    listings(id:ID) : [Listing] 
+    me: User!
+    reviews(listingId: ID) : [Review]
+    chats: [Chat!]!
+    messages(chatId: ID): [Message!]!
   }
 
 

@@ -3,7 +3,8 @@
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const {createRefreshToken} = require("../../../auth_v2");
+const {createAccessToken} = require("../../../auth_v2");
 
 const registerV2 = async (parent, args, context, info) => {
     // Checks to see if user exists
@@ -21,16 +22,24 @@ const registerV2 = async (parent, args, context, info) => {
 
     user = await user.save();
 
-    const userId = user.id;
+    const userId = user.id; 
     // Token is created and signed
-    const token = await jwt.sign(
-      { userId: userId, firstName: user._doc.firstName, lastName: user._doc.lastName, email: user._doc.email },
-      "somesupersecretkey"
-    );
+    const token = await createAccessToken(user);
+
+
+    // send refresh token as cookie
+    context.res.cookie(
+        "refresh_token", 
+        await createRefreshToken(user),
+        {
+            httpOnly:true
+        }
+    ) // first parameter is a random id name, the second param is the actual token, the fourth param are options for the cookie itself
+
 
     return {
         userId: userId,
-      token: token,
+        token: token,
     };
 }
 

@@ -14,7 +14,7 @@ const startChat = require("./chat_mutations/start_chat")
 
 
 const registerV2 = require("./auth_v2_mutations/register_v2");
-
+const loginV2 = require("./auth_v2_mutations/login_V2");
 
 
 const Mutation = {
@@ -31,7 +31,11 @@ const Mutation = {
   removeReview,
   createMessage,
   startChat,
-  registerV2
+
+
+  
+  registerV2,
+  loginV2,
 };
 
 module.exports = Mutation;

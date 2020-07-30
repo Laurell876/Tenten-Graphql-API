@@ -23,8 +23,15 @@ const http = require("http");
 const app = express();
 const jwt = require("jsonwebtoken");
 const isAuthSubscription = require("./middleware/is-auth-subscription");
+require("dotenv/config");
+const cookieParser = require("cookie-parser");
 
 const pubsub = new PubSub();
+const { createRefreshToken } = require("../auth_v2");
+const { createAccessToken } = require("../auth_v2");
+
+const UserModel = require("./models/User");
+const sendRefreshtoken = require("../send_refresh_token");
 
 const start = async () => {
   try {
@@ -47,9 +54,9 @@ const start = async () => {
       resolvers,
       context: ({ req, res, connection }) => {
         if (connection) {
-          return { ...connection, pubsub };
+          return { ...connection, pubsub, res, req };
         } else {
-          return { ...isAuth(req), pubsub: pubsub };
+          return { ...isAuth(req), pubsub: pubsub, res, req };
         }
       },
       subscriptions: {
@@ -60,7 +67,7 @@ const start = async () => {
           if (connection.authToken) {
             let decodedToken = jwt.verify(
               connection.authToken,
-              "somesupersecretkey"
+              process.env.ACCESS_TOKEN_SECRET
             );
             userId = decodedToken.userId;
             console.log(userId);
@@ -81,10 +88,47 @@ const start = async () => {
 
     app.use(cors());
 
+    app.use(cookieParser())
+
     //makes folder available public
     app.use(express.static("images"));
 
     app.use(express.static("doc"));
+
+
+
+    //Parse cookies for auth
+    app.post("/refresh_token", async (req, res) => {
+
+      // Get refresh token from cookies
+      const token = req.cookies.refresh_token;
+      if (!token) {
+        return res.send({ ok: false, accessToken: '' })
+      }
+
+      let payload = null;
+
+      // validate token
+      try {
+        payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET); // ensures token is a refresh token
+      } catch (err) {
+        console.log(err)
+        return res.send({ ok: false, accessToken: '' })
+      }
+
+      // token is valid so we can send back an access token
+      const user = await UserModel.findOne({ _id: payload.userId });
+      if (!user) return res.send({ ok: false, accessToken: '' });
+
+
+      // Send new refresh token as user, to extend session by 7 days
+      let newRefreshToken = await createRefreshToken(user)
+      sendRefreshtoken(res, newRefreshToken)
+
+      // return new access token
+      return res.send({ ok: false, accessToken: await createAccessToken(user) })
+    })
+
 
     //THIS SERVER ALLOWS US TO USE SUBSCRIPTIONS
 
@@ -92,12 +136,12 @@ const start = async () => {
     httpServer.listen(process.env.PORT || 4000, () => {
       console.log(
         `🚀 Server ready at http://localhost:${process.env.PORT || 4000}${
-          server.graphqlPath
+        server.graphqlPath
         }`
       );
       console.log(
         `🚀 Subscriptions ready at ws://localhost:${process.env.PORT || 4000}${
-          server.subscriptionsPath
+        server.subscriptionsPath
         }`
       );
     });

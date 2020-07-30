@@ -5,6 +5,9 @@ const authCheck = require("./functions/authCheck");
 const Review = require("../models/Review");
 const Chat = require("../models/Chat");
 const Message = require("../models/Message");
+
+
+
 const Query = {
   me: async (parent, args, context, info) => {
     //authentication check
@@ -20,10 +23,6 @@ const Query = {
       ...userFound._doc,
       password: null,
     };
-    try {
-    } catch (e) {
-      throw e;
-    }
   },
   users: async (parent, args, context, info) => {
     try {

@@ -1,6 +1,6 @@
 const validateToken = (authToken) => {
   // ... validate token and return a Promise, rejects in case of an error
-  decodedToken = jwt.verify(authToken, "somesupersecretkey");
+  decodedToken = jwt.verify(authToken, process.env.ACCESS_TOKEN_SECRET);
   return decodedToken;
 };
 
