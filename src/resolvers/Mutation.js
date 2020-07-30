@@ -11,6 +11,12 @@ const addReview = require("./review_mutations/add_review")
 const removeReview = require("./review_mutations/remove_review.js")
 const createMessage = require("./chat_mutations/create_message")
 const startChat = require("./chat_mutations/start_chat")
+
+
+const registerV2 = require("./auth_v2_mutations/register_v2");
+
+
+
 const Mutation = {
   signUp,
   createListing,
@@ -24,7 +30,8 @@ const Mutation = {
   addReview,
   removeReview,
   createMessage,
-  startChat
+  startChat,
+  registerV2
 };
 
 module.exports = Mutation;

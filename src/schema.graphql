@@ -153,6 +153,12 @@ const typeDefs = gql`
     createMessage(data: CreateMessageInput!) : Message!
 
     startChat(userTwo: ID!) : Chat!
+
+
+
+
+
+    registerV2(data: UserInput!) : User!
   }
 
 
