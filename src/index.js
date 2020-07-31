@@ -20,7 +20,6 @@ const Chat = require("./resolvers/Chat");
 const Message = require("./resolvers/Message");
 const Subscription = require("./resolvers/Subscription");
 const http = require("http");
-const app = express();
 const jwt = require("jsonwebtoken");
 const isAuthSubscription = require("./middleware/is-auth-subscription");
 require("dotenv/config");
@@ -81,12 +80,14 @@ const start = async () => {
       },
     });
 
-    server.applyMiddleware({ app });
+    const app = express()
 
-    const httpServer = http.createServer(app);
-    server.installSubscriptionHandlers(httpServer);
 
-    app.use(cors());
+
+    app.use(cors({
+      origin: "http://localhost:3000",
+      credentials: true
+    }));
 
     app.use(cookieParser())
 
@@ -118,9 +119,9 @@ const start = async () => {
       // token is valid so we can send back an access token
       const user = await UserModel.findOne({ _id: payload.userId });
       if (!user) return res.send({ ok: false, accessToken: '' });
-      
-      if(user.tokenVersion !== payload.tokenVersion) {
-        return res.send({ok:false, accessToken: ""});
+
+      if (user.tokenVersion !== payload.tokenVersion) {
+        return res.send({ ok: false, accessToken: "" });
       }
 
 
@@ -131,6 +132,12 @@ const start = async () => {
       // return new access token
       return res.send({ ok: true, accessToken: await createAccessToken(user) })
     })
+
+    server.applyMiddleware({ app, cors: false });
+
+
+    const httpServer = http.createServer(app);
+    server.installSubscriptionHandlers(httpServer);
 
 
     //THIS SERVER ALLOWS US TO USE SUBSCRIPTIONS
