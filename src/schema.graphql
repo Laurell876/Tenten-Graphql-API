@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
+    tokenVersion: Int!
     _id: ID!
     firstName: String!
     lastName: String!
@@ -149,6 +150,7 @@ const typeDefs = gql`
 
     registerV2(data: UserInput!) : AuthData!
     loginV2(data: LoginInput!) : AuthData!
+    revokeRefreshTokensForUser(userId: String!): Boolean
   }
 
   type Query {

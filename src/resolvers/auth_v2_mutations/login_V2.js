@@ -33,7 +33,7 @@ const loginV2 = async (parent, args, context, info) => {
 
     // send refresh token as cookie
     let newRefreshToken = await createRefreshToken(user)
-    sendRefreshtoken(res, newRefreshToken)
+    sendRefreshtoken(context.res, newRefreshToken)
 
     return {
       userId: user.id,

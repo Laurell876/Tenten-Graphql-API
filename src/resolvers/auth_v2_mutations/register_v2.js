@@ -17,6 +17,7 @@ const registerV2 = async (parent, args, context, info) => {
     // User is stored in database
     let user = new User({
       ...args.data,
+      tokenVersion: 0,
       password: hashedPassword,
     });
 

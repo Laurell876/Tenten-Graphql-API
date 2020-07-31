@@ -107,7 +107,6 @@ const start = async () => {
       }
 
       let payload = null;
-
       // validate token
       try {
         payload = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET); // ensures token is a refresh token
@@ -119,6 +118,10 @@ const start = async () => {
       // token is valid so we can send back an access token
       const user = await UserModel.findOne({ _id: payload.userId });
       if (!user) return res.send({ ok: false, accessToken: '' });
+      
+      if(user.tokenVersion !== payload.tokenVersion) {
+        return res.send({ok:false, accessToken: ""});
+      }
 
 
       // Send new refresh token as user, to extend session by 7 days
@@ -126,7 +129,7 @@ const start = async () => {
       sendRefreshtoken(res, newRefreshToken)
 
       // return new access token
-      return res.send({ ok: false, accessToken: await createAccessToken(user) })
+      return res.send({ ok: true, accessToken: await createAccessToken(user) })
     })
 
 

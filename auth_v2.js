@@ -17,7 +17,7 @@ module.exports.createAccessToken =async (user) => {
 module.exports.createRefreshToken  = async (user) => {
     const userId = user.id; 
     return await jwt.sign(
-        { userId: userId, firstName: user._doc.firstName, lastName: user._doc.lastName, email: user._doc.email },
+        { tokenVersion: user.tokenVersion, userId: userId, firstName: user._doc.firstName, lastName: user._doc.lastName, email: user._doc.email },
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn: "7d"}
     )
