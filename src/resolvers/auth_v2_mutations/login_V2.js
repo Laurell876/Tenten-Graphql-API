@@ -37,7 +37,7 @@ const loginV2 = async (parent, args, context, info) => {
 
     return {
       userId: user.id,
-      token: token,
+      accessToken: token,
     };
 }
 

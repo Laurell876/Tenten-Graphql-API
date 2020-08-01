@@ -40,7 +40,7 @@ const registerV2 = async (parent, args, context, info) => {
 
     return {
         userId: userId,
-        token: token,
+        accessToken: token,
     };
 }
 
