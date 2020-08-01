@@ -36,7 +36,7 @@ const loginV2 = async (parent, args, context, info) => {
     sendRefreshtoken(context.res, newRefreshToken)
 
     return {
-      userId: user.id,
+      user: user._doc,
       accessToken: token,
     };
 }

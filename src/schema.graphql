@@ -69,8 +69,8 @@ const typeDefs = gql`
   }
 
   type AuthData {
-    userId: ID!
     accessToken:String!
+    user: User!
   }
 
   input UserInput {
@@ -152,6 +152,7 @@ const typeDefs = gql`
     registerV2(data: UserInput!) : AuthData!
     loginV2(data: LoginInput!) : AuthData!
     revokeRefreshTokensForUser(userId: String!): Boolean
+    logout : Boolean!
   }
 
   type Query {

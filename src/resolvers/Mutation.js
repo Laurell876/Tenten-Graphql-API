@@ -16,7 +16,7 @@ const startChat = require("./chat_mutations/start_chat")
 const registerV2 = require("./auth_v2_mutations/register_v2");
 const loginV2 = require("./auth_v2_mutations/login_V2");
 const revokeRefreshTokensForUser = require("./auth_v2_mutations/revoke_refresh_tokens_for_user");
-
+const logout =  require("./auth_v2_mutations/logout");
 
 const Mutation = {
   signUp,
@@ -37,7 +37,8 @@ const Mutation = {
   
   registerV2,
   loginV2,
-  revokeRefreshTokensForUser
+  revokeRefreshTokensForUser,
+  logout
 };
 
 module.exports = Mutation;
