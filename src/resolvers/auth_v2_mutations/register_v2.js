@@ -17,13 +17,11 @@ const registerV2 = async (parent, args, context, info) => {
     // User is stored in database
     let user = new User({
       ...args.data,
-      tokenVersion: 0,
-      password: hashedPassword,
+      password: hashedPassword
     });
 
     user = await user.save();
 
-    const userId = user.id; 
     // Token is created and signed
     const token = await createAccessToken(user);
 
@@ -36,8 +34,9 @@ const registerV2 = async (parent, args, context, info) => {
             httpOnly:true
         }
     ) // first parameter is a random id name, the second param is the actual token, the fourth param are options for the cookie itself
-
-
+    
+    //console.log(user)
+    
     return {
         user: user._doc,
         accessToken: token,

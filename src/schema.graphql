@@ -20,6 +20,7 @@ const typeDefs = gql`
   }
 
   type Listing {
+    createdAt: String!
     _id:ID!
     title: String!
     bedrooms: Int!
@@ -78,7 +79,6 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-    tokenVersion: Int!
   }
 
   input LoginInput {

@@ -3,6 +3,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    required: true
+  },
   title: {
     type: String,
     required: true,

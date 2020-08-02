@@ -121,7 +121,7 @@ const start = async () => {
       if (!user) return res.send({ ok: false, accessToken: '' });
 
       if (user.tokenVersion !== payload.tokenVersion) {
-        return res.send({ ok: false, accessToken: "" });
+        return res.send({ ok: false, accessToken: " " });
       }
 
 
