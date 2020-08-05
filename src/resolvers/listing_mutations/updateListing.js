@@ -5,6 +5,8 @@ const ownerCheck = require("../functions/ownerCheck");
 
 const shortid = require("shortid");
 const { createWriteStream, mkdir, unlink } = require("fs");
+const path = require("path");
+
 
 const storeUpload = async ({ stream, filename, mimetype }) => {
   const id = shortid.generate();
@@ -41,23 +43,22 @@ const updateListing = async (parent, args, context, info) => {
 
 
     if (args.file) {
-      //if the listing already has an image delete it from the images folder
-      if (listing.image) {
-        unlink(listing.image, function (err) {
-          if (err) throw err;
-          // if no error, file has been deleted successfully
-          console.log("File deleted!");
-        });
-      }
+      const id = shortid.generate();
 
-      // Creates an images folder in the root directory
-      mkdir("images", { recursive: true }, (err) => {
-        if (err) throw err;
-      });
-      // Process upload
-      upload = await processUpload(args.file);
-      //console.log(upload)
-      listingImage = upload.path; 
+      const { createReadStream, filename } = await args.file;
+      //console.log(args.file)
+
+
+      const upload = await new Promise((res) =>
+        createReadStream().pipe(
+          createWriteStream(
+            path.join(__dirname, "../../../images", `/${id}-${filename}`)
+          )
+        )
+        .on("close",res)
+      );
+
+      listingImage = `images/${id}-${filename}`
     }
 
     //overwrites specific fields
