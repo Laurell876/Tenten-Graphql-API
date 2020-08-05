@@ -21,6 +21,7 @@ const logout =  require("./auth_v2_mutations/logout");
 
 const uploadFile = require("./upload_file_test_mutations/upload_file");
 
+const updateUser = require("./user_mutations/update_user");
 
 const Mutation = {
   signUp,
@@ -44,7 +45,9 @@ const Mutation = {
   revokeRefreshTokensForUser,
   logout,
 
-  uploadFile
+  uploadFile,
+
+  updateUser
 };
 
 module.exports = Mutation;

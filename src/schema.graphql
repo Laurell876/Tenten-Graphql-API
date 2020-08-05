@@ -81,6 +81,13 @@ const typeDefs = gql`
     password: String!
   }
 
+  input UpdateUserInput{
+      firstName: String
+      lastName: String
+      email: String
+      password: String
+  }
+
   input LoginInput {
     email:String!, 
     password:String!
@@ -155,6 +162,8 @@ const typeDefs = gql`
     logout : Boolean!
 
     uploadFile(file: Upload!): Boolean
+
+    updateUser(data: UpdateUserInput!): User!
   }
 
   type Query {
