@@ -153,6 +153,8 @@ const typeDefs = gql`
     loginV2(data: LoginInput!) : AuthData!
     revokeRefreshTokensForUser(userId: String!): Boolean
     logout : Boolean!
+
+    uploadFile(file: Upload!): Boolean
   }
 
   type Query {

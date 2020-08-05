@@ -48,7 +48,7 @@ const createListing = async (parent, args, context, info) => {
       upload = await processUpload(args.file);
       //console.log(upload)
       listingImage = upload.path
-    }
+    } 
 
     // if (args.file) {
     //   const id = shortid.generate();

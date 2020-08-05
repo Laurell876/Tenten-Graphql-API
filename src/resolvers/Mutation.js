@@ -18,6 +18,10 @@ const loginV2 = require("./auth_v2_mutations/login_V2");
 const revokeRefreshTokensForUser = require("./auth_v2_mutations/revoke_refresh_tokens_for_user");
 const logout =  require("./auth_v2_mutations/logout");
 
+
+const uploadFile = require("./upload_file_test_mutations/upload_file");
+
+
 const Mutation = {
   signUp,
   createListing,
@@ -38,7 +42,9 @@ const Mutation = {
   registerV2,
   loginV2,
   revokeRefreshTokensForUser,
-  logout
+  logout,
+
+  uploadFile
 };
 
 module.exports = Mutation;
