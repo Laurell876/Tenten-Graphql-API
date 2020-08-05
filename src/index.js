@@ -31,6 +31,7 @@ const { createAccessToken } = require("../auth_v2");
 
 const UserModel = require("./models/User");
 const sendRefreshtoken = require("../send_refresh_token");
+const path = require("path");
 
 const start = async () => {
   try {
@@ -92,7 +93,7 @@ const start = async () => {
     app.use(cookieParser())
 
     //makes folder available public
-    app.use(express.static("images"));
+    app.use("/images", express.static(path.join(__dirname, "../images")))
 
     app.use(express.static("doc"));
 
