@@ -29,11 +29,34 @@ const processUpload = async (upload) => {
 module.exports = async (parent, args, context, info) => {
     authCheck(context);
 
+
+    let userImage = null;
+    if(args.file) {
+        //console.log("file present")
+        const id = shortid.generate();
+
+        const { createReadStream, filename } = await args.file;
+        //console.log(args.file)
+  
+  
+        await new Promise((res) =>
+          createReadStream().pipe(
+            createWriteStream(
+              path.join(__dirname, "../../../images", `/${id}-${filename}`)
+            )
+          )
+          .on("close",res)
+        );
+  
+        userImage = `images/${id}-${filename}`
+    }
+
     return await User.findByIdAndUpdate(
         { _id: context.userId },
         {
             $set: {
-                ...args.data
+                ...args.data,
+                image: userImage
             }
         },
         {

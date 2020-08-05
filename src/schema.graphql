@@ -163,7 +163,7 @@ const typeDefs = gql`
 
     uploadFile(file: Upload!): Boolean
 
-    updateUser(data: UpdateUserInput!): User!
+    updateUser(data: UpdateUserInput, file: Upload): User!
   }
 
   type Query {
