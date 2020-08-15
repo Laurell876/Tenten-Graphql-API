@@ -6,8 +6,6 @@ const {
 } = require("apollo-server-express");
 
 require('dotenv').config() // pull env variables from .env file
-console.log(process.env.MONGO_PASSWORD);
-
 const Query = require("./resolvers/Query");
 const Mutation = require("./resolvers/Mutation");
 const typeDefs = require("./schema.graphql");
@@ -20,7 +18,6 @@ const User = require("./resolvers/User");
 const Review = require("./resolvers/Review");
 const Chat = require("./resolvers/Chat");
 const Message = require("./resolvers/Message");
-const Subscription = require("./resolvers/Subscription");
 const http = require("http");
 const jwt = require("jsonwebtoken");
 const isAuthSubscription = require("./middleware/is-auth-subscription");
@@ -34,6 +31,9 @@ const { createAccessToken } = require("../auth_v2");
 const UserModel = require("./models/User");
 const sendRefreshtoken = require("../send_refresh_token");
 const path = require("path");
+
+const Subscription = require("./resolvers/Subscription");
+
 
 const start = async () => {
   try {
@@ -72,7 +72,6 @@ const start = async () => {
               process.env.ACCESS_TOKEN_SECRET
             );
             userId = decodedToken.userId;
-            console.log(userId);
           }
 
           return {

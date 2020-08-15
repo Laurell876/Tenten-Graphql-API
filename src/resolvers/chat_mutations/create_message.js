@@ -37,12 +37,14 @@ module.exports = async (parent, args, context, info) => {
 
     await chatFound.save()
 
+
     //calls subscription
     context.pubsub.publish("NEW_MESSAGE", {
       newMessage: {
         ...message._doc,
       },
     });
+    
 
     return {
       ...message._doc,

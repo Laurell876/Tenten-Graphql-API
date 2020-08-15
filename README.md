@@ -6,7 +6,7 @@ This is a graphql api for the tenten web application written in JS w/ nodejs. It
 # Running The API
 
 - run npm i
-- create a .env file in the root of the project with the follow values  
+- create a .env file in the root of the project with the follow values
   ACCESS_TOKEN_SECRET    
   REFRESH_TOKEN_SECRET    
   MONGO_USER    
