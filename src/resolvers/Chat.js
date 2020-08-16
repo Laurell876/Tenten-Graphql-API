@@ -18,9 +18,8 @@ module.exports = {
   },
   lastMessage: async (parent, args, context, info) => {
     let chat = await Chat.findOne({_id: parent.id})
-    let lastMessageId = chat._doc.messages[chat._doc.messages.length -1]
-    let messages = await Message.find()
-    let lastMessageObj = messages[messages.length-1]
-    return lastMessageObj
+    //console.log(chat._doc.messages[chat._doc.messages.length -1]) //returns an id
+    let lastMessage = await Message.findOne({_id: chat._doc.messages[chat._doc.messages.length -1]})
+    return lastMessage
   },
 };

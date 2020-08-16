@@ -85,19 +85,23 @@ const Query = {
   },
   chats: async (parent, args, context, info) => {
     try {
-      return await Chat.find();
+      const chats = await Chat.find();
+      if(args.chatId) {
+        return chats.filter(chat => chat._id == args.chatId)
+      }
+      return chats;
     } catch (e) {
       throw e;
     }
   },
   messages: async (parent, args, context, info) => {
     try {
+      let messages = await Message.find();
       if (args.chatId) {
-        let messages = await Message.find();
         messages = messages.filter(message=>message._doc.chat == args.chatId );
         return messages;
       }
-      return await Message.find();
+      return message;
     } catch (e) {
       throw e;
     }

@@ -172,14 +172,13 @@ const typeDefs = gql`
     listings(id:ID) : [Listing] 
     me: User!
     reviews(listingId: ID) : [Review]
-    chats: [Chat!]!
+    chats(chatId: ID): [Chat!]!
     messages(chatId: ID): [Message!]!
   }
 
 
   type Subscription {
     newMessage: Message!
-
   }
 `
 
