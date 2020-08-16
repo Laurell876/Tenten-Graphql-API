@@ -87,7 +87,7 @@ const start = async () => {
 
 
     app.use(cors({
-      origin: "http://localhost:5000",
+      origin: "https://tenten-react-site.herokuapp.com/",
       credentials: true
     }));
 
