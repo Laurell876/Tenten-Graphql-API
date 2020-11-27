@@ -23,9 +23,14 @@
   },
   "homepage": "https://github.com/Laurell876/tenten-graphql-api#readme",
   "dependencies": {
+<<<<<<< HEAD
     "@apollo/client": "^3.1.3",
     "apollo-server": "^2.14.0",
     "apollo-server-express": "^2.14.0",
+=======
+    "apollo-server": "^2.14.2",
+    "apollo-server-express": "^2.14.2",
+>>>>>>> f57576021bf4d6be14b6164b52a886413454362c
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
