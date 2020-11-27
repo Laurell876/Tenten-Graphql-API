@@ -6,7 +6,6 @@ const {
 } = require("apollo-server-express");
 
 require('dotenv').config() // pull env variables from .env file
-console.log(process.env.MONGO_PASSWORD);
 
 const Query = require("./resolvers/Query");
 const Mutation = require("./resolvers/Mutation");
