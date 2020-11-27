@@ -14,3 +14,4 @@ This is a graphql api for the tenten web application written in JS w/ nodejs. It
   MONGO_DB  
 
 
+- Ensure that on the deployed branch the database url is not set to the local mongodb url
