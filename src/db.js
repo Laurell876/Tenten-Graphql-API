@@ -1,9 +1,9 @@
 
 const mongoose = require("mongoose");
 
-//const MONGO_CONNECTION = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@tenten-pp23z.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
+const MONGO_CONNECTION = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@tenten-pp23z.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
 
-const MONGO_CONNECTION = `mongodb://127.0.0.1:27017/${process.env.MONGO_DB}`
+//const MONGO_CONNECTION = `mongodb://127.0.0.1:27017/${process.env.MONGO_DB}`
 
 mongoose.set('useFindAndModify', false);
 
