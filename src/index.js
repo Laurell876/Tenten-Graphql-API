@@ -87,7 +87,7 @@ const start = async () => {
 
 
     app.use(cors({
-      origin: "https://tenten-react-site.herokuapp.com",
+      origin: "https://tenten-react-site.herokuapp.com", // no ending slash
       credentials: true
     }));
 
